@@ -1,5 +1,5 @@
 # mimiciv-queries
-Putting queries for mimic-iv in a public database to reconstruct the data into the schema for the 2019 Physionet Challenge Data
+Putting queries for mimic-iv in a public database to reconstruct the data into the schema required for sepsis labeling and model training, in a similar format to the 2019 Physionet Challenge in early prediction of sepsis
 
 # Some Exploratory Statistics
 1. There are 76384 unique icu stays in the MIMIC-IV (as of April 2, 2021 on the MIMIC-IV BigQuery database, which is the most updated version as per the MIMIC-IV project page)
