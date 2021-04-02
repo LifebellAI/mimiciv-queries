@@ -7,13 +7,13 @@ SELECT
   hadm_id,
   DATETIME_TRUNC(charttime,
     HOUR) AS charttime,
-  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'blood'), org_name, null)) as blood_cx,
-  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'urine'), org_name, null)) as urine_cx,
-  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'sputum'), org_name, null)) as urine_cx,
-  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'stool'), org_name, null)) as stool_cx,
-  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'BRONCHOALVEOLAR LAVAGE'), org_name, null)) as broncho_lavage_cx,
-  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'PLEURAL FLUID'), org_name, null)) as pleural_cx,
-  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'CSF;SPINAL FLUID'), org_name, null)) as csf_cx,
+  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'blood'), charttime, null)) as blood_cx,
+  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'urine'), charttime, null)) as urine_cx,
+  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'sputum'), charttime, null)) as sputum_cx,
+  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'stool'), charttime, null)) as stool_cx,
+  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'BRONCHOALVEOLAR LAVAGE'), charttime, null)) as broncho_lavage_cx,
+  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'PLEURAL FLUID'), charttime, null)) as pleural_cx,
+  ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'CSF;SPINAL FLUID'), charttime, null)) as csf_cx,
 FROM
   `physionet-data.mimic_hosp.microbiologyevents`
 JOIN
