@@ -2,6 +2,8 @@
 -- and pivots out the columns so that we get a wide (pivoted) version of that table
 -- in doing so, we also have to account for the case where multiple labs of the same type are available in the same hour
 -- when this is the case, this query will take the AVERAGE of those
+CREATE OR REPLACE TABLE `physionet.hourly_labs_pivoted` as
+
 SELECT
 subject_id,
 hadm_id,
