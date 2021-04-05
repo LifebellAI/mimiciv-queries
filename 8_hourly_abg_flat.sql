@@ -1,4 +1,6 @@
 -- This file pulls out all of the arterial blood gas monitoring data
+CREATE OR REPLACE TABLE `physionet.hourly_abg_flat` as
+
 SELECT 
 subject_id,
 hadm_id,
