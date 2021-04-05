@@ -1,3 +1,5 @@
+CREATE OR REPLACE TABLE `physionet.hourly_abg_pivoted` as
+
 SELECT 
 subject_id,
 hadm_id,
