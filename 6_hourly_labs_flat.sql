@@ -6,6 +6,8 @@
 -- They should be correct on first approximation, but if we find unexpectedly sparse columns, we may want to double check these
 -- This query TRUNCATES THE HOUR to the earliest, closest hour to when the lab was *recorded* 
 -- (Charttime according to MIMIC-IV documentation refers to when the lab was recorded)
+CREATE OR REPLACE TABLE `physionet.hourly_labs_flat` as
+
 WITH
   labs AS (
   SELECT
