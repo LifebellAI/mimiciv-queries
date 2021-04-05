@@ -1,3 +1,5 @@
+CREATE OR REPLACE TABLE `physionet.hourly_vitals_pivoted` as
+
 SELECT 
 subject_id,
 hadm_id,
