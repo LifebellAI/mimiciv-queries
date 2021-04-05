@@ -2,6 +2,9 @@
 -- Including blood, urine, stool, BAL, pleural, and CSF
 -- We are notably excluding less common things like joint aspirations and swabs that we aren't currently using as
 -- indications of clinical supsicion of infection
+
+CREATE OR REPLACE TABLE `physionet.cultures_hourly` as
+
 SELECT
   subject_id,
   hadm_id,
