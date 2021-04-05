@@ -1,3 +1,4 @@
+CREATE OR REPLACE TABLE `physionet.hourly_supplemental_o2_pivoted` as
 
 SELECT 
 subject_id,
