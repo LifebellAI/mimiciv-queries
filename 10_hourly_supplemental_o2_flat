@@ -1,4 +1,7 @@
 -- This file pulls out data about both FiO2 and O2Flow - it's unclear yet which one is a more reliable field
+
+CREATE OR REPLACE TABLE `physionet.hourly_supplemental_o2_flat` as
+
 SELECT 
 subject_id,
 hadm_id,
