@@ -1,5 +1,5 @@
 -- This schema is *SIMILAR* but not exactly the same as the PNC 2019 Challenge Schema
--- Changing this to the correct schema should be <1% of the work involved in getting it to this last mile
+-- Changing this to the correct schema should be very simple
 -- Please feel free to modify this yourself (add/rename/remove fields) to get it into the schema needed
 SELECT 
 subject_id,
