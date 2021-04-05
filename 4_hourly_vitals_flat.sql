@@ -1,3 +1,5 @@
+CREATE OR REPLACE TABLE `physionet.hourly_vitals_flat` as
+
 SELECT 
 subject_id,
 hadm_id,
