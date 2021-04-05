@@ -1,3 +1,5 @@
+CREATE OR REPLACE TABLE `physionet.demographic_and_stay_data` as
+
 SELECT
   subject_id,
   hadm_id,
