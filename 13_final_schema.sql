@@ -67,22 +67,22 @@ ventilated
 FROM `elevated-pod-307118.physionet.demographic_and_stay_data`
 FULL JOIN
 `elevated-pod-307118.physionet.cultures_hourly`
-USING(subject_id, hadm_id)
+USING(subject_id, hadm_id, stay_id)
 FULL JOIN
 `elevated-pod-307118.physionet.iv_antibiotics`
-USING(subject_id, hadm_id, charttime)
+USING(subject_id, hadm_id, stay_id, charttime)
 LEFT JOIN
 `elevated-pod-307118.physionet.hourly_vitals_pivoted`
-USING(subject_id, hadm_id, charttime)
+USING(subject_id, hadm_id, stay_id, charttime)
 FULL JOIN
 `elevated-pod-307118.physionet.hourly_labs_pivoted`
-USING(subject_id, hadm_id, charttime)
+USING(subject_id, hadm_id, stay_id, charttime)
 FULL JOIN
 `elevated-pod-307118.physionet.hourly_abg_pivoted`
-USING(subject_id, hadm_id, charttime)
+USING(subject_id, hadm_id, stay_id, charttime)
 FULL JOIN
 `elevated-pod-307118.physionet.hourly_supplemental_o2_pivoted`
-USING(subject_id, hadm_id, charttime)
+USING(subject_id, hadm_id, stay_id, charttime)
 FULL JOIN
-`elevated-pod-307118.physionet.hourly_vent_status`
-USING(subject_id, hadm_id, charttime)
+`elevated-pod-307118.physionet.hourly_patient_vent_status_pivoted`
+USING(subject_id, hadm_id, stay_id, charttime)
