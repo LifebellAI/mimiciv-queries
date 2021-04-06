@@ -7,6 +7,7 @@ CREATE OR REPLACE TABLE `physionet.hourly_labs_pivoted` as
 SELECT
 subject_id,
 hadm_id,
+stay_id,
 charttime,
 AVG(if (label= 'Bicarbonate', value, null)) as bicarbonate,
 AVG(if (label= 'Chloride', value, null)) as chloride,
@@ -32,4 +33,5 @@ FROM `elevated-pod-307118.physionet.hourly_labs_flat`
 GROUP BY 
 subject_id,
 hadm_id,
+stay_id,
 charttime
