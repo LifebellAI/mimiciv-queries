@@ -1,3 +1,4 @@
+
 -- This schema is *SIMILAR* but not exactly the same as the PNC 2019 Challenge Schema
 -- Changing this to the correct schema should be very simple
 -- Please feel free to modify this yourself (add/rename/remove fields) to get it into the schema needed
@@ -7,6 +8,7 @@ CREATE OR REPLACE TABLE `physionet.final_schema` as
 SELECT 
 subject_id,
 hadm_id,
+stay_id,
 charttime,
 admittime,
 deathtime,
@@ -67,7 +69,7 @@ ventilated
 FROM `elevated-pod-307118.physionet.demographic_and_stay_data`
 FULL JOIN
 `elevated-pod-307118.physionet.cultures_hourly`
-USING(subject_id, hadm_id, stay_id)
+USING(subject_id, hadm_id, stay_id, charttime)
 FULL JOIN
 `elevated-pod-307118.physionet.iv_antibiotics`
 USING(subject_id, hadm_id, stay_id, charttime)
