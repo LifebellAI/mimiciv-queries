@@ -8,6 +8,7 @@ CREATE OR REPLACE TABLE `physionet.cultures_hourly` as
 SELECT
   subject_id,
   hadm_id,
+  stay_id,
   DATETIME_TRUNC(charttime,
     HOUR) AS charttime,
   ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'blood'), charttime, null)) as blood_cx,
@@ -43,5 +44,13 @@ WHERE spec_type_desc in
 'BRONCHOALVEOLAR LAVAGE',
 'CSF;SPINAL FLUID',
 'PLEURAL FLUID')
-GROUP BY subject_id, hadm_id, DATETIME_TRUNC(charttime,
+-- Since the microbiology table does not record the stay_id, we have to use the following condition
+ -- to map the culture to the correct incident of the patients stay
+AND
+DATETIME_TRUNC(charttime,
+    HOUR) < outtime 
+AND
+DATETIME_TRUNC(charttime,
+    HOUR) < intime 
+GROUP BY subject_id, hadm_id, stay_id, DATETIME_TRUNC(charttime,
     HOUR)
