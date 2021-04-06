@@ -7,13 +7,14 @@ SELECT
 subject_id,
 hadm_id,
 stay_id,
-starttime,
-amount,
-amountuom,
-rate,
-rateuom,
-totalamount,
-ordercategoryname,
+DATETIME_TRUNC(starttime, HOUR) as charttime,
+min(starttime),
+min(endtime),
+sum(amount),
+min(amountuom),
+sum(rate),
+min(rateuom),
+sum(totalamount),
 FROM `physionet-data.mimic_icu.inputevents` 
 WHERE ordercategoryname = "08-Antibiotics (IV)"
-order by starttime
+GROUP BY DATETIME_TRUNC(starttime, HOUR), subject_id, hadm_id, stay_id
