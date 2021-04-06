@@ -21,7 +21,13 @@ WITH
       `physionet-data.mimic_icu.icustays`
     USING
       (subject_id,
-        hadm_id))
+        hadm_id)
+    WHERE
+    DATETIME_TRUNC(charttime,
+        HOUR) < outtime 
+    AND
+    DATETIME_TRUNC(charttime,
+        HOUR) < intime )
   JOIN
     `physionet-data.mimic_hosp.d_labitems`
   USING
@@ -31,6 +37,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -45,6 +52,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -60,6 +68,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -75,6 +84,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -90,6 +100,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -105,6 +116,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -120,6 +132,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -135,6 +148,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -150,6 +164,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -165,6 +180,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -180,6 +196,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -195,6 +212,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -210,6 +228,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -225,6 +244,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -240,6 +260,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -255,6 +276,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -270,6 +292,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -285,6 +308,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
@@ -300,6 +324,7 @@ WITH
   SELECT
     subject_id,
     hadm_id,
+    stay_id,
     label,
     DATETIME_TRUNC(charttime,
       HOUR) AS charttime,
