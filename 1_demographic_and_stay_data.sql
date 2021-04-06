@@ -6,6 +6,7 @@ SELECT
   stay_id,
   admittime,
   deathtime,
+  hour as charttime,
   admission_type,
   discharge_location,
   first_careunit,
@@ -27,3 +28,9 @@ JOIN
 USING
   (subject_id,
     hadm_id)
+JOIN
+  UNNEST(GENERATE_TIMESTAMP_ARRAY(TIMESTAMP(DATETIME_TRUNC(admittime,
+          HOUR)),
+      TIMESTAMP(DATETIME_TRUNC(dischtime,
+          HOUR)),
+      INTERVAL 1 HOUR)) HOUR
