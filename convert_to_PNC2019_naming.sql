@@ -39,5 +39,12 @@ mean_arterial_bp as MAP,
 systolic_bp as SBP,
 temperature as Temp,
 spo2 as O2Sat,
-heart_rate as HR
+heart_rate as HR,
+ventilated as vent_status,
+blood_cx as blood_cx_order,
+urine_cx as urine_cx_order,
+sputum_cx as sputum_cx_order,
+antibiotics_amount as iv_abx_dose,
+antibiotics_amount as iv_abx_ordered
 FROM `elevated-pod-307118.physionet.final_schema`
+WHERE total_los>8
