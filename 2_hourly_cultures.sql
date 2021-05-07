@@ -51,6 +51,6 @@ DATETIME_TRUNC(charttime,
     HOUR) < outtime 
 AND
 DATETIME_TRUNC(charttime,
-    HOUR) < intime 
+    HOUR) > intime
 GROUP BY subject_id, hadm_id, stay_id, DATETIME_TRUNC(charttime,
     HOUR)

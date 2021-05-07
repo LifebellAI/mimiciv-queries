@@ -27,7 +27,7 @@ WITH
         HOUR) < outtime 
     AND
     DATETIME_TRUNC(charttime,
-        HOUR) < intime )
+        HOUR) > intime )
   JOIN
     `physionet-data.mimic_hosp.d_labitems`
   USING
