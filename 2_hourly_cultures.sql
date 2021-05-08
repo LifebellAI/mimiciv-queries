@@ -10,7 +10,7 @@ SELECT
   hadm_id,
   stay_id,
   DATETIME_TRUNC(charttime,
-    HOUR) AS charttime,
+    HOUR) AS chart_hour,
   ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'blood'), charttime, null)) as blood_cx,
   ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'urine'), charttime, null)) as urine_cx,
   ANY_VALUE(if (REGEXP_CONTAINS(LOWER(spec_type_desc), 'sputum'), charttime, null)) as sputum_cx,

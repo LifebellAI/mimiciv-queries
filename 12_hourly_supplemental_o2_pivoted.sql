@@ -4,8 +4,8 @@ SELECT
 subject_id,
 hadm_id,
 stay_id,
-charttime,
+chart_hour,
 AVG(if (label ='Inspired O2 Fraction', value, null)) as FiO2,
 AVG(if (label ='O2 Flow', value, null)) as O2_flow_rate,
 FROM `elevated-pod-307118.physionet.hourly_supplemental_o2_flat`
-GROUP BY subject_id, hadm_id, stay_id, charttime
+GROUP BY subject_id, hadm_id, stay_id, chart_hour

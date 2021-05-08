@@ -6,7 +6,7 @@ SELECT
   stay_id,
   admittime,
   deathtime,
-  DATETIME(hour) as charttime,
+  DATETIME(hour) as chart_hour,
   admission_type,
   discharge_location,
   first_careunit,

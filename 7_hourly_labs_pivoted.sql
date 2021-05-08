@@ -8,7 +8,7 @@ SELECT
 subject_id,
 hadm_id,
 stay_id,
-charttime,
+chart_hour,
 AVG(if (label= 'Bicarbonate', value, null)) as bicarbonate,
 AVG(if (label= 'Chloride', value, null)) as chloride,
 AVG(if (label= 'Bilirubin, Indirect', value, null)) as bilirubin_indirect,
@@ -34,4 +34,4 @@ GROUP BY
 subject_id,
 hadm_id,
 stay_id,
-charttime
+chart_hour
