@@ -1,6 +1,6 @@
 SELECT 
 subject_id as id,
-row_number() over (partition by subject_id, hadm_id, stay_id order by charttime asc) as ICULOS,
+row_number() over (partition by subject_id, hadm_id, stay_id order by chart_hour asc) as ICULOS,
 admittime as HospAdmTime,
 0 as Unit1,
 1 as Unit2,
