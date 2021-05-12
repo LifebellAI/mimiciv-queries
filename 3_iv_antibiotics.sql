@@ -7,7 +7,7 @@ SELECT
 subject_id,
 hadm_id,
 stay_id,
-DATETIME_TRUNC(starttime, HOUR) as charttime,
+DATETIME_TRUNC(starttime, HOUR) as chart_hour,
 min(starttime) as starttime,
 min(endtime) as endtime,
 sum(amount) as amount,

@@ -10,7 +10,7 @@ SELECT
   hadm_id,
   stay_id,
   DATETIME_TRUNC(starttime,
-    HOUR) AS charttime,
+    HOUR) AS chart_hour,
   starttime,
   endtime,
   day,

@@ -5,7 +5,7 @@ SELECT
 subject_id,
 hadm_id,
 stay_id,
-DATETIME_TRUNC(charttime, HOUR) as charttime,
+DATETIME_TRUNC(charttime, HOUR) as chart_hour,
 valuenum as value,
 valueuom as units,
 label

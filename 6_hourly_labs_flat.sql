@@ -27,7 +27,7 @@ WITH
         HOUR) < outtime 
     AND
     DATETIME_TRUNC(charttime,
-        HOUR) < intime )
+        HOUR) > intime )
   JOIN
     `physionet-data.mimic_hosp.d_labitems`
   USING
@@ -40,7 +40,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -71,7 +71,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -87,7 +87,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -103,7 +103,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -119,7 +119,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -135,7 +135,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -151,7 +151,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -167,7 +167,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -183,7 +183,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -215,7 +215,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -231,7 +231,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -247,7 +247,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -263,7 +263,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -279,7 +279,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -295,7 +295,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -311,7 +311,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid
@@ -327,7 +327,7 @@ WITH
     stay_id,
     label,
     DATETIME_TRUNC(charttime,
-      HOUR) AS charttime,
+      HOUR) AS chart_hour,
     valuenum AS value,
     valueuom AS units,
     fluid AS fluid

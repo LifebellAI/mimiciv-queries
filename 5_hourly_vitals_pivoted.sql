@@ -4,7 +4,7 @@ SELECT
 subject_id,
 hadm_id,
 stay_id,
-charttime,
+chart_hour,
 AVG(if (label in ('RR per min', 'Respiratory Rate','Respiratory Rate (Total)'), value, null)) as resp_rate,
 AVG(if (label in ('HR per min','Heart Rate'), value, null)) as heart_rate,
         -- To do: need to check if Skin Temperature is provided in Farenheit!
@@ -16,4 +16,4 @@ AVG(if (label in ('Arterial Blood Pressure mean', 'Non Invasive Blood Pressure m
 AVG(if (label in ('EtCO2'), value, null)) as etco2,
 AVG(if (label in ('O2 saturation pulseoxymetry'), value, null)) as spo2,
 FROM `elevated-pod-307118.physionet.hourly_vitals_flat`
-GROUP BY subject_id, hadm_id, stay_id, charttime
+GROUP BY subject_id, hadm_id, stay_id, chart_hour
