@@ -1,6 +1,9 @@
+CREATE OR REPLACE TABLE `physionet.pnc2019_style_data`
+AS
 SELECT 
 subject_id as id,
 row_number() over (partition by subject_id, hadm_id, stay_id order by chart_hour asc) as ICULOS,
+chart_hour,
 admittime as HospAdmTime,
 0 as Unit1,
 1 as Unit2,
@@ -44,7 +47,8 @@ ventilated as vent_status,
 blood_cx as blood_cx_order,
 urine_cx as urine_cx_order,
 sputum_cx as sputum_cx_order,
-antibiotics_amount as iv_abx_dose,
-antibiotics_amount as iv_abx_ordered
+antibiotics_order as iv_abx_ordered,
+antibiotics_order as iv_abx_dose,
+antibiotics_type as iv_abx_type,
 FROM `elevated-pod-307118.physionet.final_schema`
 WHERE total_los>8
