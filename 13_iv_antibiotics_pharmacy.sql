@@ -8,6 +8,7 @@ DATETIME_TRUNC(starttime, HOUR) as chart_hour,
 intime,
 outtime,
 medication,
+-- todo: instead of taking the arbitrary minimum, take the values from the latest entertime for a given stay_id/chart_hour/medication combination 
 min(entertime) as entertime,
 min(starttime) as starttime,
 min(route) as route,
@@ -17,7 +18,7 @@ min(disp_sched) as disp_sched,
 min(doses_per_24_hrs) as doses_per_24_hrs,
 min(duration) as duration,
 min(duration_interval) as duration_interval,
-count(*) as records
+count(1) as records
 from `physionet-data.mimic_hosp.pharmacy`
 JOIN `physionet-data.mimic_icu.icustays`
 USING (subject_id, hadm_id)
@@ -79,9 +80,7 @@ and route in (
 AND
 lower(medication) not like "%desensitization%" --ignore desensitization protocols in preparation for abx
 AND
-DATETIME_TRUNC(stoptime,
-    HOUR) < outtime 
+DATETIME_TRUNC(starttime, HOUR) < outtime 
 AND
-DATETIME_TRUNC(starttime,
-    HOUR) > intime
-GROUP BY subject_id, hadm_id, stay_id, intime, outtime, medication, chart_hour
+DATETIME_TRUNC(starttime, HOUR) > intime
+GROUP BY subject_id, hadm_id, stay_id, intime, outtime, chart_hour, medication
