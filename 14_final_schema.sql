@@ -23,9 +23,11 @@ anchor_age as age,
 blood_cx,
 urine_cx,
 sputum_cx,
--- Antibiotics fields
+-- Antibiotics fields (input events)
 amount as antibiotics_amount,
 rate as antibiotics_rate,
+--Antibiotics fields (pharmacy)
+abx_orders,
 -- vitals
 resp_rate,
 heart_rate,
@@ -72,6 +74,15 @@ FULL JOIN
 USING(subject_id, hadm_id, stay_id, chart_hour)
 FULL JOIN
 `elevated-pod-307118.physionet.iv_antibiotics`
+USING(subject_id, hadm_id, stay_id, chart_hour)
+-- iv_abx_pharmacy is rolled up to the stay x chart_hour x medication grain 
+-- we need to roll it up further to the stay x chart_hour grain in order to join with the rest of the tables
+FULL JOIN
+(
+    select subject_id, hadm_id, stay_id, chart_hour, count(1) as abx_orders
+    FROM `elevated-pod-307118.physionet.iv_abx_pharmacy`
+    GROUP BY subject_id, hadm_id, stay_id, chart_hour
+)
 USING(subject_id, hadm_id, stay_id, chart_hour)
 LEFT JOIN
 `elevated-pod-307118.physionet.hourly_vitals_pivoted`
