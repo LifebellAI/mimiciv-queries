@@ -9,11 +9,10 @@ SELECT
   subject_id,
   hadm_id,
   stay_id,
-  DATETIME_TRUNC(starttime,
+  DATETIME_TRUNC(hour,
     HOUR) AS chart_hour,
   starttime,
   endtime,
-  day,
   TRUE AS ventilated
 FROM
   `physionet-data.mimic_icu.procedureevents`
@@ -22,6 +21,6 @@ JOIN
           HOUR)),
       TIMESTAMP(DATETIME_TRUNC(endtime,
           HOUR)),
-      INTERVAL 1 HOUR)) DAY
+      INTERVAL 1 HOUR)) hour
 WHERE
   ordercategoryname = "Ventilation"
