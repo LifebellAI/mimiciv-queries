@@ -10,8 +10,8 @@ DATETIME_TRUNC(`physionet-data.mimic_hosp.prescriptions`.starttime, HOUR) as cha
 drug, 
 medication, 
 prod_strength, 
-dose_val_rx, 
-dose_unit_rx, 
+if(dose_unit_rx='mg', cast(dose_val_rx as numeric)*1000, cast(dose_val_rx as numeric)) as dose_val_rx, 
+'mg' as dose_unit_rx, 
 duration, 
 duration_interval
 from `physionet-data.mimic_hosp.prescriptions`
@@ -26,4 +26,8 @@ where
      or lower(drug) like '%dobutamine%'
 )
 and
-lower(`physionet-data.mimic_hosp.prescriptions`.route) in ('iv', 'iv drip');
+lower(`physionet-data.mimic_hosp.prescriptions`.route) in ('iv', 'iv drip')
+and
+dose_val_rx not like "%-%"
+and
+dose_unit_rx in ('mg', 'mcg');
