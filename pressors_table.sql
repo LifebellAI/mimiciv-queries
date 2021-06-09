@@ -14,7 +14,7 @@ if(dose_unit_rx='mg', cast(dose_val_rx as numeric)*1000, cast(dose_val_rx as num
 'mcg' as dose_unit_rx, 
 duration, 
 duration_interval
--- note: whenever joining between prescriptions and pharmacy, make sure your medication field / drug field filters are applied to both tables (especially drug)
+-- note: whenever joining between prescriptions and pharmacy, make sure your medication field / drug field filters are applied to the drug field
 -- since pharmacy orders can comprise of multiple prescriptions, you may end up with multiple records in the final table 
 -- with each record representing one of potentially multiple drugs being used to fulfill a pharmacy order (which will invalidate dosage aggregations)
 from `physionet-data.mimic_hosp.prescriptions`
@@ -28,13 +28,6 @@ where
      or lower(`physionet-data.mimic_hosp.prescriptions`.drug) like '%dopamine%'
      or lower(`physionet-data.mimic_hosp.prescriptions`.drug) like '%dobutamine%'
 )
-and
-(
-    lower(`physionet-data.mimic_hosp.pharmacy`.medication) like '%epinephrine%'
-     or lower(`physionet-data.mimic_hosp.pharmacy`.medication) like '%dopamine%'
-     or lower(`physionet-data.mimic_hosp.pharmacy`.medication) like '%dobutamine%'
-)
-
 and
 -- the below filters remove a very small % of records that are problematic
 lower(`physionet-data.mimic_hosp.prescriptions`.route) in ('iv', 'iv drip')
