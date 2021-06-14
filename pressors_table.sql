@@ -14,7 +14,7 @@ if(dose_unit_rx='mg', cast(dose_val_rx as numeric)*1000, cast(dose_val_rx as num
 'mcg' as dose_unit_rx, 
 duration, 
 duration_interval
--- note: whenever joining between prescriptions and pharmacy, make sure your medication field / drug field filters are applied to the drug field
+-- note: whenever joining between prescriptions and pharmacy, make sure your medication/drug field filters are applied to the drug field, which is a lower grain
 -- since pharmacy orders can comprise of multiple prescriptions, you may end up with multiple records in the final table 
 -- with each record representing one of potentially multiple drugs being used to fulfill a pharmacy order (which will invalidate dosage aggregations)
 from `physionet-data.mimic_hosp.prescriptions`
