@@ -28,12 +28,10 @@ amount as antibiotics_amount,
 rate as antibiotics_rate,
 --pressors fields
 pressors_orders,
---note: these values still need to be adjusted before labeling
--- which expects mcg/kg/minute where kg is patient weight, and min would be 60)
-dobutamine_mcg, 
-dopamine_mcg,
-norepinephrine_mcg,
-epinephrine_mcg,
+dobutamine_mcg/weight/60 as dobutamine, 
+dopamine_mcg/weight/60 as dopamine,
+norepinephrine_mcg/weight/60 as norepinephrine,
+epinephrine_mcg/weight/60 as epinephrine,
 -- vitals
 resp_rate,
 heart_rate,
