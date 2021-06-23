@@ -101,10 +101,10 @@ FULL JOIN
 (
     select subject_id, hadm_id, stay_id, chart_hour
     , count(1) as pressors_orders
-    , sum(if(lower(medication) like '%dobutamine%',cast(dose_val_rx as numeric), null)) as dobutamine_mcg
-    , sum(if(lower(medication) like '%dopamine%',cast(dose_val_rx as numeric), null)) as dopamine_mcg
-    , sum(if(lower(medication) like '%norepinephrine%',cast(dose_val_rx as numeric), null)) as norepinephrine_mcg
-    , sum(if((lower(medication) like '%epinephrine%') AND (lower(medication) not like '%nor%'), cast(dose_val_rx as numeric), null)) as epinephrine_mcg
+    , sum(if(lower(drug) like '%dobutamine%',cast(dose_val_rx as numeric), null)) as dobutamine_mcg
+    , sum(if(lower(drug) like '%dopamine%',cast(dose_val_rx as numeric), null)) as dopamine_mcg
+    , sum(if(lower(drug) like '%norepinephrine%',cast(dose_val_rx as numeric), null)) as norepinephrine_mcg
+    , sum(if((lower(drug) like '%epinephrine%') AND (lower(medication) not like '%nor%'), cast(dose_val_rx as numeric), null)) as epinephrine_mcg
     from `elevated-pod-307118.physionet.pressors`
     GROUP BY subject_id, hadm_id, stay_id, chart_hour
 )
