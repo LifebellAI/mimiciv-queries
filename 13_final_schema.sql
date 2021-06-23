@@ -5,7 +5,7 @@
 
 CREATE OR REPLACE TABLE `physionet.final_schema` as
 
-SELECT 
+SELECT
 subject_id,
 hadm_id,
 stay_id,
@@ -18,6 +18,8 @@ last_careunit,
 total_los,
 ethnicity,
 gender,
+weight,
+weight_units,
 anchor_age as age,
 -- Cultures fields
 blood_cx,
@@ -28,10 +30,10 @@ amount as antibiotics_amount,
 rate as antibiotics_rate,
 --pressors fields
 pressors_orders,
-dobutamine_mcg/weight/60 as dobutamine, 
-dopamine_mcg/weight/60 as dopamine,
-norepinephrine_mcg/weight/60 as norepinephrine,
-epinephrine_mcg/weight/60 as epinephrine,
+dobutamine_mcg as dobutamine,
+dopamine_mcg as dopamine,
+norepinephrine_mcg as norepinephrine,
+epinephrine_mcg as epinephrine,
 -- vitals
 resp_rate,
 heart_rate,
