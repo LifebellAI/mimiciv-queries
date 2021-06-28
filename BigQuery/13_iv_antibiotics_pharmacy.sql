@@ -1,14 +1,12 @@
 CREATE OR REPLACE TABLE `physionet.iv_abx_pharmacy` as
 
-select 
+SELECT
 subject_id,
 hadm_id,
 stay_id,
 DATETIME_TRUNC(starttime, HOUR) as chart_hour,
-intime,
-outtime,
 medication,
--- todo: instead of taking the arbitrary minimum, take the values from the latest entertime for a given stay_id/chart_hour/medication combination 
+-- todo: instead of taking the arbitrary minimum, take the values from the latest entertime for a given stay_id/chart_hour/medication combination
 min(entertime) as entertime_min,
 min(starttime) as starttime_min,
 min(route) as route_min,
@@ -80,7 +78,7 @@ and route in (
 AND
 lower(medication) not like "%desensitization%" --ignore desensitization protocols in preparation for abx
 AND
-DATETIME_TRUNC(starttime, HOUR) < outtime 
+DATETIME_TRUNC(starttime, HOUR) < outtime
 AND
 DATETIME_TRUNC(starttime, HOUR) > intime
-GROUP BY subject_id, hadm_id, stay_id, intime, outtime, chart_hour, medication
+GROUP BY subject_id, hadm_id, stay_id, chart_hour, medication

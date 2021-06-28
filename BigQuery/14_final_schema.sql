@@ -5,7 +5,7 @@
 
 CREATE OR REPLACE TABLE `physionet.final_schema` as
 
-SELECT 
+SELECT
 subject_id,
 hadm_id,
 stay_id,
@@ -50,7 +50,7 @@ lactate,
 magnesium,
 phosphate,
 potassium,
-troponin_I,
+troponin_i,
 hematocrit,
 hemoglobin,
 ptt,
@@ -58,14 +58,14 @@ wbc,
 fibrinogen,
 platelets,
 -- ABG
-PaO2,
-SaO2,
-PaCO2,
-pH,
+pao2,
+sao2,
+paco2,
+ph,
 base_excess,
 -- supplemental flow
-FiO2,
-O2_flow_rate,
+fio2,
+o2_flow_rate,
 -- vent status
 ventilated
 FROM `elevated-pod-307118.physionet.demographic_and_stay_data`
@@ -75,7 +75,7 @@ USING(subject_id, hadm_id, stay_id, chart_hour)
 FULL JOIN
 `elevated-pod-307118.physionet.iv_antibiotics`
 USING(subject_id, hadm_id, stay_id, chart_hour)
--- iv_abx_pharmacy is rolled up to the stay x chart_hour x medication grain 
+-- iv_abx_pharmacy is rolled up to the stay x chart_hour x medication grain
 -- we need to roll it up further to the stay x chart_hour grain in order to join with the rest of the tables
 FULL JOIN
 (
