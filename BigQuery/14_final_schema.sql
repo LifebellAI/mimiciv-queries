@@ -3,7 +3,7 @@
 -- Changing this to the correct schema should be very simple
 -- Please feel free to modify this yourself (add/rename/remove fields) to get it into the schema needed
 
-CREATE OR REPLACE TABLE `physionet.final_schema` as
+CREATE OR REPLACE TABLE `physionet.final_schema` AS
 
 SELECT
 subject_id,
@@ -18,14 +18,22 @@ last_careunit,
 total_los,
 ethnicity,
 gender,
-anchor_age as age,
+weight,
+weight_units,
+anchor_age AS age,
 -- Cultures fields
 blood_cx,
 urine_cx,
 sputum_cx,
 -- Antibiotics fields (input events)
-amount as antibiotics_amount,
-rate as antibiotics_rate,
+amount AS antibiotics_amount,
+rate AS antibiotics_rate,
+--pressors fields
+pressors_orders,
+dobutamine_mcg AS dobutamine,
+dopamine_mcg AS dopamine,
+norepinephrine_mcg AS norepinephrine,
+epinephrine_mcg AS epinephrine,
 --Antibiotics fields (pharmacy)
 abx_orders,
 -- vitals
@@ -33,7 +41,7 @@ resp_rate,
 heart_rate,
 temperature,
 systolic_bp,
-diasystolic_bp as diastolic_bp,
+diasystolic_bp AS diastolic_bp,
 mean_arterial_bp,
 etco2,
 spo2,
@@ -79,7 +87,7 @@ USING(subject_id, hadm_id, stay_id, chart_hour)
 -- we need to roll it up further to the stay x chart_hour grain in order to join with the rest of the tables
 FULL JOIN
 (
-    select subject_id, hadm_id, stay_id, chart_hour, count(1) as abx_orders
+    SELECT subject_id, hadm_id, stay_id, chart_hour, count(1) AS abx_orders
     FROM `elevated-pod-307118.physionet.iv_abx_pharmacy`
     GROUP BY subject_id, hadm_id, stay_id, chart_hour
 )
@@ -98,4 +106,17 @@ FULL JOIN
 USING(subject_id, hadm_id, stay_id, chart_hour)
 FULL JOIN
 `elevated-pod-307118.physionet.hourly_patient_vent_status_pivoted`
+USING(subject_id, hadm_id, stay_id, chart_hour)
+--join aggregated and transformed pressors data
+FULL JOIN
+(
+    SELECT subject_id, hadm_id, stay_id, chart_hour
+    , COUNT(1) AS pressors_orders
+    , SUM(IF(LOWER(drug) LIKE '%dobutamine%',CAST(dose_val_rx AS NUMERIC), NULL)) AS dobutamine_mcg
+    , SUM(IF(LOWER(drug) LIKE '%dopamine%',CAST(dose_val_rx AS NUMERIC), NULL)) AS dopamine_mcg
+    , SUM(IF(LOWER(drug) LIKE '%norepinephrine%',CAST(dose_val_rx AS NUMERIC), NULL)) AS norepinephrine_mcg
+    , SUM(IF((LOWER(drug) LIKE '%epinephrine%') AND (LOWER(medication) NOT LIKE '%nor%'), CAST(dose_val_rx AS NUMERIC), NULL)) AS epinephrine_mcg
+    FROM `elevated-pod-307118.physionet.pressors`
+    GROUP BY subject_id, hadm_id, stay_id, chart_hour
+)
 USING(subject_id, hadm_id, stay_id, chart_hour)

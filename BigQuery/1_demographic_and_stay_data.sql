@@ -6,17 +6,19 @@ SELECT
   stay_id,
   admittime,
   deathtime,
-  DATETIME(hour) as chart_hour,
+  DATETIME(hour) AS chart_hour,
   admission_type,
   discharge_location,
   first_careunit,
   last_careunit,
   intime,
   outtime,
-  los as total_los,
+  los AS total_los,
   ethnicity,
   gender,
-  anchor_age
+  anchor_age,
+  weight,
+  weight_units
 FROM
   `physionet-data.mimic_core.admissions`
 JOIN
@@ -28,6 +30,20 @@ JOIN
 USING
   (subject_id,
     hadm_id)
+LEFT JOIN
+(
+    SELECT
+    subject_id, ROUND(AVG(valuenum), 2) AS weight,
+    'kg' AS weight_units --note: the weight uom is always kg
+    FROM  `physionet-data.mimic_icu.chartevents`
+    WHERE valuenum IS NOT NULL
+    -- admission weight itemid: 226512
+    -- note: may want to also consider itemid 224639 (daily weight) in the future
+    AND itemid = 226512
+    AND valuenum > 0
+    GROUP BY subject_id
+)
+USING (subject_id)
 JOIN
   UNNEST(GENERATE_TIMESTAMP_ARRAY(TIMESTAMP(DATETIME_TRUNC(admittime,
           HOUR)),
