@@ -45,6 +45,6 @@ blood_cx as blood_cx_order,
 urine_cx as urine_cx_order,
 sputum_cx as sputum_cx_order,
 antibiotics_amount as iv_abx_dose,
-antibiotics_amount as iv_abx_ordered
+abx_orders as iv_abx_ordered
 FROM `elevated-pod-307118.physionet.final_schema`
 WHERE total_los>8
