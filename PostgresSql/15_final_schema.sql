@@ -12,9 +12,9 @@ BEGIN
 END
 $do$;
 
-CREATE  TABLE public.final_schema as
+CREATE  TABLE public.final_schema AS
 
-SELECT 
+SELECT
 subject_id,
 hadm_id,
 stay_id,
@@ -27,20 +27,20 @@ last_careunit,
 total_los,
 ethnicity,
 gender,
-anchor_age as age,
+anchor_age AS age,
 -- Cultures fields
 blood_cx,
 urine_cx,
 sputum_cx,
 -- Antibiotics fields
-amount as antibiotics_amount,
-rate as antibiotics_rate,
+amount AS antibiotics_amount,
+rate AS antibiotics_rate,
 -- vitals
 resp_rate,
 heart_rate,
 temperature,
 systolic_bp,
-diasystolic_bp as diastolic_bp,
+diasystolic_bp AS diastolic_bp,
 mean_arterial_bp,
 etco2,
 spo2,
