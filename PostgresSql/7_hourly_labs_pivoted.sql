@@ -12,35 +12,35 @@ BEGIN
 END
 $do$;
 
-CREATE TABLE public.hourly_labs_pivoted as
+CREATE TABLE public.hourly_labs_pivoted AS
 
 SELECT
 subject_id,
 hadm_id,
 stay_id,
 chart_hour,
-AVG(CASE WHEN label in ('Bicarbonate')THEN value END) as bicarbonate,
-AVG(CASE WHEN label in ('Chloride')THEN value END) as chloride,
-AVG(CASE WHEN label in ('Bilirubin, Indirect')THEN value END) as bilirubin_indirect,
-AVG(CASE WHEN label in ('Bilirubin, Direct')THEN value END) as bilirubin_direct,
-AVG(CASE WHEN label in ('Bilirubin, Total')THEN value END) as bilirubin_total,
-AVG(CASE WHEN label in ('Calcium')THEN value END) as calcium,
-AVG(CASE WHEN label in ('Creatinine')THEN value END) as creatinine,
-AVG(CASE WHEN label in ('Glucose')THEN value END) as glucose,
-AVG(CASE WHEN label in ('Lactate')THEN value END) as lactate,
-AVG(CASE WHEN label in ('Magnesium')THEN value END) as magnesium,
-AVG(CASE WHEN label in ('Phosphate')THEN value END) as phosphate,
-AVG(CASE WHEN label in ('Potassium')THEN value END) as potassium,
-AVG(CASE WHEN label in ('Troponin I')THEN value END) as troponin_i,
-AVG(CASE WHEN label in ('Hematocrit')THEN value END) as hematocrit,
-AVG(CASE WHEN label in ('Hemoglobin')THEN value END) as hemoglobin,
-AVG(CASE WHEN label in ('PTT')THEN value END) as ptt,
-AVG(CASE WHEN label in ('WBC Count')THEN value END) as wbc,
-AVG(CASE WHEN label in ('Fibrinogen')THEN value END) as fibrinogen,
-AVG(CASE WHEN label in ('Platelet Count')THEN value END) as platelets
+AVG(CASE WHEN label IN ('Bicarbonate') THEN value END) AS bicarbonate,
+AVG(CASE WHEN label IN ('Chloride') THEN value END) AS chloride,
+AVG(CASE WHEN label IN ('Bilirubin, Indirect') THEN value END) AS bilirubin_indirect,
+AVG(CASE WHEN label IN ('Bilirubin, Direct') THEN value END) AS bilirubin_direct,
+AVG(CASE WHEN label IN ('Bilirubin, Total') THEN value END) AS bilirubin_total,
+AVG(CASE WHEN label IN ('Calcium') THEN value END) AS calcium,
+AVG(CASE WHEN label IN ('Creatinine') THEN value END) AS creatinine,
+AVG(CASE WHEN label IN ('Glucose') THEN value END) AS glucose,
+AVG(CASE WHEN label IN ('Lactate') THEN value END) AS lactate,
+AVG(CASE WHEN label IN ('Magnesium') THEN value END) AS magnesium,
+AVG(CASE WHEN label IN ('Phosphate') THEN value END) AS phosphate,
+AVG(CASE WHEN label IN ('Potassium') THEN value END) AS potassium,
+AVG(CASE WHEN label IN ('Troponin I') THEN value END) AS troponin_i,
+AVG(CASE WHEN label IN ('Hematocrit') THEN value END) AS hematocrit,
+AVG(CASE WHEN label IN ('Hemoglobin') THEN value END) AS hemoglobin,
+AVG(CASE WHEN label IN ('PTT') THEN value END) AS ptt,
+AVG(CASE WHEN label IN ('WBC Count') THEN value END) AS wbc,
+AVG(CASE WHEN label IN ('Fibrinogen') THEN value END) AS fibrinogen,
+AVG(CASE WHEN label IN ('Platelet Count') THEN value END) AS platelets
 
 FROM hourly_labs_flat
-GROUP BY 
+GROUP BY
 subject_id,
 hadm_id,
 stay_id,

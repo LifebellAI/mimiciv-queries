@@ -9,20 +9,21 @@ BEGIN
 END
 $do$;
 
-CREATE TABLE public.hourly_supplemental_o2_flat as
+CREATE TABLE public.hourly_supplemental_o2_flat AS
 
-SELECT 
+SELECT
 subject_id,
 hadm_id,
 stay_id,
-DATE_TRUNC('hour',charttime) as chart_hour,
-valuenum as value,
-valueuom as units,
+DATE_TRUNC('hour', charttime) AS chart_hour,
+valuenum AS value,
+valueuom AS units,
 label
 FROM mimic_icu.chartevents
 JOIN mimic_icu.d_items
 USING(itemid)
-WHERE label in
-('Inspired O2 Fraction',
-'O2 Flow'
+WHERE label IN
+(
+  'Inspired O2 Fraction',
+  'O2 Flow'
 )

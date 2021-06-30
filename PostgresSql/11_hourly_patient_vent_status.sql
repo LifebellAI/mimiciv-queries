@@ -10,7 +10,7 @@ BEGIN
 END
 $do$;
 
-CREATE TABLE public.hourly_patient_vent_status_pivoted as
+CREATE TABLE public.hourly_patient_vent_status_pivoted AS
 SELECT
   subject_id,
   hadm_id,
@@ -22,5 +22,5 @@ SELECT
   TRUE AS ventilated
 FROM
   mimic_icu.procedureevents
-CROSS JOIN LATERAL (SELECT generate_series(DATE_TRUNC('hour', starttime::timestamp )::timestamp, date_trunc('hour', endtime::timestamp)::timestamp, '1 hour') as day) as hours
+CROSS JOIN LATERAL (SELECT generate_series(DATE_TRUNC('hour', starttime::timestamp )::timestamp, date_trunc('hour', endtime::timestamp)::timestamp, '1 hour') AS day) AS hours
 WHERE ordercategoryname = 'Ventilation'
