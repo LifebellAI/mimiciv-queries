@@ -45,6 +45,10 @@ blood_cx AS blood_cx_order,
 urine_cx AS urine_cx_order,
 sputum_cx AS sputum_cx_order,
 antibiotics_amount AS iv_abx_dose,
-abx_orders AS iv_abx_ordered
+abx_orders AS iv_abx_ordered,
+dopamine,
+dobutamine,
+epinephrine,
+norepinephrine
 FROM `elevated-pod-307118.physionet.final_schema`
 WHERE total_los>8

@@ -28,14 +28,14 @@ sputum_cx,
 -- Antibiotics fields (input events)
 amount AS antibiotics_amount,
 rate AS antibiotics_rate,
---pressors fields
+--Antibiotics fields (pharmacy)
+abx_orders,
+-- pressors fields
 pressors_orders,
 dobutamine_mcg AS dobutamine,
 dopamine_mcg AS dopamine,
 norepinephrine_mcg AS norepinephrine,
 epinephrine_mcg AS epinephrine,
---Antibiotics fields (pharmacy)
-abx_orders,
 -- vitals
 resp_rate,
 heart_rate,
@@ -81,7 +81,7 @@ FULL JOIN
 `elevated-pod-307118.physionet.cultures_hourly`
 USING(subject_id, hadm_id, stay_id, chart_hour)
 FULL JOIN
-`elevated-pod-307118.physionet.iv_antibiotics`
+`elevated-pod-307118.physionet.iv_antibiotics_inputevents`
 USING(subject_id, hadm_id, stay_id, chart_hour)
 -- iv_abx_pharmacy is rolled up to the stay x chart_hour x medication grain
 -- we need to roll it up further to the stay x chart_hour grain in order to join with the rest of the tables

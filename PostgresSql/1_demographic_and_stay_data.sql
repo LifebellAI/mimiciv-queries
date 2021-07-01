@@ -39,14 +39,16 @@ USING
   (subject_id,
     hadm_id)
 LEFT JOIN
-  (
-    SELECT
-    subject_id, ROUND(AVG(valuenum), 2) as weight,
-    'kg' as weight_units --note: the weight uom is always kg in mimiciv
-    FROM mimic_icu.chartevents
-    WHERE valuenum IS NOT NULL
-    AND itemid = 226512
-    AND valuenum > 0
-    GROUP BY subject_id
-  )
+(
+	SELECT
+	subject_id,
+	AVG(valuenum) AS weight,
+	'kg' as weight_units --note: the weight uom is always kg in mimiciv
+	FROM mimic_icu.chartevents
+	WHERE valuenum IS NOT NULL
+	AND itemid = 226512
+	AND valuenum > 0
+	GROUP BY subject_id
+) AS x
+USING (subject_id)
 CROSS JOIN LATERAL (SELECT generate_series(DATE_TRUNC('hour', admittime::timestamp )::timestamp, date_trunc('hour', dischtime::timestamp)::timestamp, '1 hour') chart_hour) as hours

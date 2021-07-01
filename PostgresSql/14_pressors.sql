@@ -13,7 +13,7 @@ SELECT
 subject_id,
 hadm_id,
 stay_id,
-DATETIME_TRUNC('hour', mimic_hosp.prescriptions.starttime) AS chart_hour,
+DATE_TRUNC('hour', mimic_hosp.prescriptions.starttime) AS chart_hour,
 mimic_hosp.prescriptions.starttime,
 mimic_hosp.prescriptions.stoptime,
 drug,
@@ -41,6 +41,6 @@ AND
 -- the below filters remove a very small % of records that are problematic
 lower(mimic_hosp.prescriptions.route) IN ('iv', 'iv drip')
 AND
-dose_val_rx NOT LIKE "%-%" --todo: determine how to transform these (take highest number from range?)
+dose_val_rx NOT LIKE '%-%' --todo: determine how to transform these (take highest number from range?)
 AND
 dose_unit_rx IN ('mg', 'mcg');

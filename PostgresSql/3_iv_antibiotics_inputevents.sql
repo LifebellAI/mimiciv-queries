@@ -4,13 +4,13 @@
 DO
 $do$
 BEGIN
-   IF  EXISTS (SELECT FROM public.iv_antibiotics) THEN
+   IF  EXISTS (SELECT FROM public.iv_antibiotics_inputevents) THEN
         DROP TABLE public.cultures_hourly;
     END IF;
 END
 $do$;
 
-CREATE TABLE public.iv_antibiotics as
+CREATE TABLE public.iv_antibiotics_inputevents as
 
 SELECT
 subject_id,
