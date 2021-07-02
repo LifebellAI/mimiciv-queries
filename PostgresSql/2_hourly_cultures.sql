@@ -4,14 +4,7 @@
 -- indications of clinical supsicion of infection
 
 
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.cultures_hourly) THEN
-        DROP TABLE public.cultures_hourly;
-    END IF;
-END
-$do$;
+DROP TABLE IF EXISTS public.cultures_hourly;
 
 CREATE TABLE public.cultures_hourly as
 

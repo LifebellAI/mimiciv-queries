@@ -1,11 +1,5 @@
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.hourly_abg_pivoted) THEN
-        DROP TABLE public.hourly_abg_pivoted;
-    END IF;
-END
-$do$;
+
+DROP TABLE IF EXISTS public.hourly_abg_pivoted;
 
 CREATE TABLE public.hourly_abg_pivoted AS
 

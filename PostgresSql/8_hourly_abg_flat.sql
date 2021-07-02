@@ -1,12 +1,6 @@
 -- This file pulls out all of the arterial blood gas monitoring data
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.hourly_abg_flat) THEN
-        DROP TABLE public.hourly_abg_flat;
-    END IF;
-END
-$do$;
+
+DROP TABLE IF EXISTS public.hourly_abg_flat;
 
 CREATE TABLE public.hourly_abg_flat AS
 

@@ -3,14 +3,7 @@
 -- Changing this to the correct schema should be very simple
 -- Please feel free to modify this yourself (add/rename/remove fields) to get it into the schema needed
 
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.final_schema) THEN
-        DROP TABLE public.final_schema;
-    END IF;
-END
-$do$;
+DROP TABLE IF EXISTS public.final_schema;
 
 CREATE  TABLE public.final_schema AS
 

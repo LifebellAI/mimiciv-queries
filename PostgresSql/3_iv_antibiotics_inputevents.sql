@@ -1,16 +1,10 @@
 -- This query collects all of the rows recording iv antibiotics, from the larger table of all ICU inputevents
 -- We include both rate and amount because data from one EMR comes with a calculated rate (ml/hr),
 -- whereas data from the other EMR comes with only an amount and a total amount (rate presumably can be calculated from this)
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.iv_antibiotics_inputevents) THEN
-        DROP TABLE public.cultures_hourly;
-    END IF;
-END
-$do$;
 
-CREATE TABLE public.iv_antibiotics_inputevents as
+DROP TABLE IF EXISTS public.cultures_hourly;
+
+CREATE TABLE public.iv_antibiotics AS
 
 SELECT
 subject_id,

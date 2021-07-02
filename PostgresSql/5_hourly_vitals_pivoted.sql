@@ -1,12 +1,5 @@
 
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.hourly_vitals_pivoted) THEN
-        DROP TABLE public.hourly_vitals_pivoted;
-    END IF;
-END
-$do$;
+DROP TABLE IF EXISTS public.hourly_vitals_pivoted;
 
 CREATE TABLE public.hourly_vitals_pivoted as
 
