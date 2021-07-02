@@ -1,11 +1,6 @@
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.hourly_vitals_flat) THEN
-        DROP TABLE public.cultures_hourly;
-    END IF;
-END
-$do$;
+
+DROP TABLE IF EXISTS public.cultures_hourly;
+
 CREATE TABLE public.hourly_vitals_flat as
 
 SELECT 
