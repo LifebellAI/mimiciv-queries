@@ -1,16 +1,16 @@
 -- This query collects all of the rows recording iv antibiotics, from the larger table of all ICU inputevents
--- We include both rate and amount because data from one EMR comes with a calculated rate (ml/hr), 
+-- We include both rate and amount because data from one EMR comes with a calculated rate (ml/hr),
 -- whereas data from the other EMR comes with only an amount and a total amount (rate presumably can be calculated from this)
 
 DROP TABLE IF EXISTS public.cultures_hourly;
 
-CREATE TABLE public.iv_antibiotics as
+CREATE TABLE public.iv_antibiotics AS
 
 SELECT
 subject_id,
 hadm_id,
 stay_id,
-DATE_TRUNC('hour',starttime) as chart_hour,
+DATE_TRUNC('hour', starttime) as chart_hour,
 min(starttime) as starttime,
 min(endtime) as endtime,
 sum(amount) as amount,
@@ -20,4 +20,4 @@ min(rateuom) as rateuom,
 sum(totalamount) as totalamount
 FROM mimic_icu.inputevents
 WHERE ordercategoryname = '08-Antibiotics (IV)'
-GROUP BY DATE_TRUNC('hour',starttime), subject_id, hadm_id, stay_id
+GROUP BY subject_id, hadm_id, stay_id, DATE_TRUNC('hour', starttime)

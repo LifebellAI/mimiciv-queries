@@ -5,9 +5,9 @@
 
 DROP TABLE IF EXISTS public.final_schema;
 
-CREATE  TABLE public.final_schema as
+CREATE  TABLE public.final_schema AS
 
-SELECT 
+SELECT
 subject_id,
 hadm_id,
 stay_id,
@@ -20,20 +20,28 @@ last_careunit,
 total_los,
 ethnicity,
 gender,
-anchor_age as age,
+anchor_age AS age,
 -- Cultures fields
 blood_cx,
 urine_cx,
 sputum_cx,
--- Antibiotics fields
-amount as antibiotics_amount,
-rate as antibiotics_rate,
+-- Antibiotics fields (input events)
+amount AS antibiotics_amount,
+rate AS antibiotics_rate,
+-- antibiotics fields (pharmacy)
+abx_orders,
+-- pressors fields
+pressors_orders,
+dobutamine_mcg AS dobutamine,
+dopamine_mcg AS dopamine,
+norepinephrine_mcg AS norepinephrine,
+epinephrine_mcg AS epinephrine,
 -- vitals
 resp_rate,
 heart_rate,
 temperature,
 systolic_bp,
-diasystolic_bp as diastolic_bp,
+diasystolic_bp AS diastolic_bp,
 mean_arterial_bp,
 etco2,
 spo2,
@@ -73,7 +81,14 @@ FULL JOIN
 public.cultures_hourly
 USING(subject_id, hadm_id, stay_id, chart_hour)
 FULL JOIN
-public.iv_antibiotics
+public.iv_antibiotics_inputevents
+USING(subject_id, hadm_id, stay_id, chart_hour)
+FULL JOIN
+(
+  SELECT subject_id, hadm_id, stay_id, chart_hour, count(1) AS abx_orders
+  FROM public.iv_antibiotics_pharmacy
+  GROUP BY subject_id, hadm_id, stay_id, chart_hour
+) AS abx_pharmacy
 USING(subject_id, hadm_id, stay_id, chart_hour)
 LEFT JOIN
 public.hourly_vitals_pivoted
@@ -89,7 +104,20 @@ public.hourly_supplemental_o2_pivoted
 USING(subject_id, hadm_id, stay_id, chart_hour)
 FULL JOIN
 public.hourly_patient_vent_status_pivoted
-USING(subject_id, hadm_id, stay_id, chart_hour);
+USING(subject_id, hadm_id, stay_id, chart_hour)
+FULL JOIN
+(
+  SELECT subject_id, hadm_id, stay_id, chart_hour,
+  count(1) AS pressors_orders,
+  SUM(CASE WHEN LOWER(drug) LIKE '%dobutamine%' THEN CAST(dose_val_rx AS numeric) ELSE NULL END) AS dobutamine_mcg,
+  SUM(CASE WHEN LOWER(drug) LIKE '%dopamine%' THEN CAST(dose_val_rx AS numeric) ELSE NULL END) AS dopamine_mcg,
+  SUM(CASE WHEN LOWER(drug) LIKE '%norepinephrine%' THEN CAST(dose_val_rx AS  numeric) ELSE NULL END) AS norepinephrine_mcg,
+  SUM(CASE WHEN (LOWER(drug) LIKE '%epinephrine%') AND (LOWER(medication) NOT LIKE '%nor%') THEN  CAST(dose_val_rx AS numeric) ELSE NULL END) AS epinephrine_mcg
+  FROM public.pressors
+  GROUP BY subject_id, hadm_id, stay_id, chart_hour
+) AS pressors
+USING(subject_id, hadm_id, stay_id, chart_hour)
+;
 
 DO
 $do$

@@ -12,14 +12,14 @@ SELECT
   subject_id,
   hadm_id,
   stay_id,
-  DATE_TRUNC('hour',charttime) AS chart_hour,
-  max(CASE WHEN LOWER(spec_type_desc) LIKE 'blood' THEN 1 else 0 end) as blood_cx,
-  max(CASE WHEN LOWER(spec_type_desc) LIKE 'urine' THEN 1 else 0 end) as urine_cx,
-  max(CASE WHEN LOWER(spec_type_desc) LIKE 'sputum' THEN 1 else 0 end )as sputum_cx,
-  max(CASE WHEN LOWER(spec_type_desc) LIKE 'stool' THEN 1 else 0 end) as stool_cx,
-  max(CASE WHEN LOWER(spec_type_desc) LIKE 'BRONCHOALVEOLAR LAVAGE' THEN 1 else 0 end) as broncho_lavage_cx,
-  max(CASE WHEN LOWER(spec_type_desc) LIKE 'PLEURAL FLUID' THEN 1 else 0 end )as pleural_cx,
-  max(CASE WHEN LOWER(spec_type_desc) LIKE 'CSF;SPINAL FLUID' THEN 1 else 0 end )as csf_cx
+  DATE_TRUNC('hour', charttime) as chart_hour,
+  max(CASE WHEN LOWER(spec_type_desc) LIKE 'blood' THEN 1 ELSE 0 END) as blood_cx,
+  max(CASE WHEN LOWER(spec_type_desc) LIKE 'urine' THEN 1 ELSE 0 END) as urine_cx,
+  max(CASE WHEN LOWER(spec_type_desc) LIKE 'sputum' THEN 1 ELSE 0 END ) as sputum_cx,
+  max(CASE WHEN LOWER(spec_type_desc) LIKE 'stool' THEN 1 ELSE 0 END) as stool_cx,
+  max(CASE WHEN LOWER(spec_type_desc) LIKE 'BRONCHOALVEOLAR LAVAGE' THEN 1 ELSE 0 END) as broncho_lavage_cx,
+  max(CASE WHEN LOWER(spec_type_desc) LIKE 'PLEURAL FLUID' THEN 1 ELSE 0 END ) as pleural_cx,
+  max(CASE WHEN LOWER(spec_type_desc) LIKE 'CSF;SPINAL FLUID' THEN 1 ELSE 0 END ) as csf_cx
 FROM
   mimic_hosp.microbiologyevents
 JOIN
@@ -27,9 +27,9 @@ JOIN
 USING
   (subject_id,
     hadm_id)
-WHERE spec_type_desc in 
-('SPUTUM', 
-'BLOOD CULTURE', 
+WHERE spec_type_desc in
+('SPUTUM',
+'BLOOD CULTURE',
 'URINE',
 'FLUID RECEIVED IN BLOOD CULTURE BOTTLES',
 'URINE,KIDNEY',
@@ -49,7 +49,7 @@ WHERE spec_type_desc in
 -- Since the microbiology table does not record the stay_id, we have to use the following condition
  -- to map the culture to the correct incident of the patients stay
 AND
-DATE_TRUNC('hour',charttime) < outtime
+DATE_TRUNC('hour', charttime) < outtime
 AND
-DATE_TRUNC('hour',charttime) > intime
-GROUP BY subject_id, hadm_id, stay_id, DATE_TRUNC('hour',charttime)
+DATE_TRUNC('hour', charttime) > intime
+GROUP BY subject_id, hadm_id, stay_id, DATE_TRUNC('hour', charttime)

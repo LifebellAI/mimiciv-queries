@@ -1,4 +1,4 @@
-CREATE OR REPLACE TABLE `physionet.demographic_and_stay_data` as
+CREATE OR REPLACE TABLE `physionet.demographic_and_stay_data` AS
 
 SELECT
   subject_id,

@@ -1,8 +1,8 @@
 -- This query uses the table "procedureevents" which records when a patient was ventilated and then when they were unventilated
--- In order to expand this into the hourly format we need, I've used the "Generate Timestamp Array" function provided by bigquery: 
+-- In order to expand this into the hourly format we need, I've used the "Generate Timestamp Array" function provided by bigquery:
 -- See: https://cloud.google.com/bigquery/docs/reference/standard-sql/array_functions#generate_date_array
 
-CREATE OR REPLACE TABLE `physionet.hourly_patient_vent_status_pivoted` as
+CREATE OR REPLACE TABLE `physionet.hourly_patient_vent_status_pivoted` AS
 
 
 SELECT
