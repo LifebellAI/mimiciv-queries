@@ -1,12 +1,4 @@
-
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.demographic_and_stay_data) THEN
-        DROP TABLE public.demographic_and_stay_data;
-    END IF;
-END
-$do$;
+DROP TABLE If EXISTS public.demographic_and_stay_data;
 
 CREATE TABLE public.demographic_and_stay_data as
 

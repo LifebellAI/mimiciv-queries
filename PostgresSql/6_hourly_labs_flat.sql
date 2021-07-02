@@ -7,14 +7,7 @@
 -- This query TRUNCATES THE HOUR to the earliest, closest hour to when the lab was *recorded* 
 -- (Charttime according to MIMIC-IV documentation refers to when the lab was recorded)
 
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.hourly_labs_flat) THEN
-        DROP TABLE public.hourly_labs_flat;
-    END IF;
-END
-$do$;
+DROP TABLE IF EXISTS public.hourly_labs_flat;
 
 CREATE TABLE public.hourly_labs_flat as
 

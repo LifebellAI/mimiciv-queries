@@ -1,11 +1,6 @@
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.hourly_supplemental_o2_pivoted) THEN
-        DROP TABLE public.hourly_supplemental_o2_pivoted;
-    END IF;
-END
-$do$;
+
+DROP TABLE IF EXISTS public.hourly_supplemental_o2_pivoted;
+
 CREATE TABLE public.hourly_supplemental_o2_pivoted as
 
 SELECT 

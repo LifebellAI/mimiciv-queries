@@ -1,13 +1,6 @@
 -- This file pulls out data about both FiO2 and O2Flow - it's unclear yet which one is a more reliable field
 
-DO
-$do$
-BEGIN
-   IF  EXISTS (SELECT FROM public.hourly_supplemental_o2_flat) THEN
-        DROP TABLE public.hourly_supplemental_o2_flat;
-    END IF;
-END
-$do$;
+DROP TABLE IF EXISTS public.hourly_supplemental_o2_flat;
 
 CREATE TABLE public.hourly_supplemental_o2_flat as
 
